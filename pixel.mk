@@ -18,4 +18,3 @@ PRODUCT_PACKAGES += \
     libaptX_encoder \
     libaptXHD_encoder
 
-
