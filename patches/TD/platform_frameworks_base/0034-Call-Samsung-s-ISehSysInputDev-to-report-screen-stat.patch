@@ -11,19 +11,19 @@ This fixes touchscreen not waking up on Galaxy F23
  2 files changed, 32 insertions(+)
 
 diff --git a/services/core/Android.bp b/services/core/Android.bp
-index 89c8ca567dd9..34a4579855ef 100644
+index 5e952c17..3cec5f49 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -173,6 +173,7 @@ java_library_static {
-         "overlayable_policy_aidl-java",
+@@ -175,6 +175,7 @@ java_library_static {
          "SurfaceFlingerProperties",
          "com.android.sysprop.watchdog",
+         "faceunlock_framework",
 +        "vendor.samsung.hardware.sysinput-V1.2-java", // HIDL
      ],
      javac_shard_size: 50,
  }
 diff --git a/services/core/java/com/android/server/display/LocalDisplayAdapter.java b/services/core/java/com/android/server/display/LocalDisplayAdapter.java
-index 2a219289cf10..29f653f0edd4 100644
+index 2a219289..29f653f0 100644
 --- a/services/core/java/com/android/server/display/LocalDisplayAdapter.java
 +++ b/services/core/java/com/android/server/display/LocalDisplayAdapter.java
 @@ -33,6 +33,7 @@ import android.os.Trace;
@@ -96,5 +96,5 @@ index 2a219289cf10..29f653f0edd4 100644
                          // have a sidekick available, tell it now that it can take control.
                          if (Display.isSuspendedState(state) && state != Display.STATE_OFF
 -- 
-2.25.1
+2.34.1
 
