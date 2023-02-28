@@ -17,3 +17,5 @@ TARGET_SUPPORTS_QUICK_TAP := true
 PRODUCT_PACKAGES += \
     libaptX_encoder \
     libaptXHD_encoder
+
+
