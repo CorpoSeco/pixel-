@@ -22,6 +22,7 @@ index d65c8c76ab..b7d6bd65f3 100644
 +
          onCancelEnrollment(errMsgId);
      }
+
 diff --git a/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java b/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java
 index 20f8af65fa..e1a9f9a6dd 100644
 --- a/src/com/android/settings/biometrics/fingerprint/FingerprintEnrollFindSensor.java
