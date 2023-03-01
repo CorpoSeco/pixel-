@@ -16,22 +16,22 @@ to make this
  6 files changed, 388 insertions(+), 5 deletions(-)
 
 diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
-index df6f08df7c56..740127888c4b 100644
+index 42136941..8c82dbf8 100644
 --- a/packages/SystemUI/Android.bp
 +++ b/packages/SystemUI/Android.bp
-@@ -125,6 +125,7 @@ android_library {
-         "jsr330",
-         "lottie",
-         "LowLightDreamLib",
+@@ -128,6 +128,7 @@ android_library {
+         "faceunlock_framework",
+         "vendor.lineage.powershare-V1.0-java",
+         "custom-preference",
 +        "vendor.goodix.hardware.biometrics.fingerprint-V2.1-java",
      ],
      manifest: "AndroidManifest.xml",
  
 diff --git a/packages/SystemUI/res/values/config.xml b/packages/SystemUI/res/values/config.xml
-index 92b132a8f32e..c1cf51b85a1c 100644
+index 54261372..7d8133c2 100644
 --- a/packages/SystemUI/res/values/config.xml
 +++ b/packages/SystemUI/res/values/config.xml
-@@ -577,7 +577,7 @@
+@@ -580,7 +580,7 @@
  
      <!-- The radius of the enrollment progress bar, in dp -->
      <integer name="config_udfpsEnrollProgressBar" translatable="false">
@@ -41,7 +41,7 @@ index 92b132a8f32e..c1cf51b85a1c 100644
  
      <!-- The time (in ms) needed to trigger the lock icon view's long-press affordance -->
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt
-index 1c62f8a4e508..7b2713bf3419 100644
+index 09a7fb33..4b89557f 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsControllerOverlay.kt
 @@ -102,7 +102,9 @@ class UdfpsControllerOverlay(
@@ -66,7 +66,7 @@ index 1c62f8a4e508..7b2713bf3419 100644
                          if (accessibilityManager.isTouchExplorationEnabled) {
                              setOnHoverListener { v, event -> onTouch(v, event, true) }
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
-index a15456d46897..d591cc809129 100644
+index a15456d4..72f7a718 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.kt
 @@ -19,17 +19,26 @@ import android.content.Context
@@ -184,7 +184,7 @@ index a15456d46897..d591cc809129 100644
          animationViewController?.onDisplayConfiguring()
          mUdfpsDisplayMode?.enable(onDisplayConfigured)
 +
-+        mySurfaceView.setVisibility(VISIBLE)
++    mySurfaceView.setVisibility(VISIBLE)
 +        Log.d("PHH", "setting surface visible!")
 +
 +        val brightness = File("/sys/class/backlight/panel0-backlight/brightness").readText().toDouble()
@@ -210,7 +210,7 @@ index a15456d46897..d591cc809129 100644
          animationViewController?.onDisplayUnconfigured()
          mUdfpsDisplayMode?.disable(null /* onDisabled */)
 +
-+        if (hasAsusGhbm) {
++    if (hasAsusGhbm) {
 +            fodFileObserver = object: FileObserver(asusGhbmOnAchieved, FileObserver.MODIFY) {
 +                override fun onEvent(event: Int, path: String): Unit {
 +                    Log.d("PHH-Enroll", "Asus ghbm event")
@@ -256,13 +256,13 @@ index a15456d46897..d591cc809129 100644
      }
  }
 diff --git a/services/core/Android.bp b/services/core/Android.bp
-index 34a4579855ef..604e1be0f03f 100644
+index 3cec5f49..98d269c9 100644
 --- a/services/core/Android.bp
 +++ b/services/core/Android.bp
-@@ -173,7 +173,12 @@ java_library_static {
-         "overlayable_policy_aidl-java",
+@@ -175,7 +175,12 @@ java_library_static {
          "SurfaceFlingerProperties",
          "com.android.sysprop.watchdog",
+         "faceunlock_framework",
 -        "vendor.samsung.hardware.sysinput-V1.2-java", // HIDL
 +        // HIDL
 +        "vendor.samsung.hardware.sysinput-V1.2-java",
@@ -274,7 +274,7 @@ index 34a4579855ef..604e1be0f03f 100644
      javac_shard_size: 50,
  }
 diff --git a/services/core/java/com/android/server/biometrics/AuthService.java b/services/core/java/com/android/server/biometrics/AuthService.java
-index 6fbc3c66c1bc..748152aa7c97 100644
+index 6fbc3c66..748152aa 100644
 --- a/services/core/java/com/android/server/biometrics/AuthService.java
 +++ b/services/core/java/com/android/server/biometrics/AuthService.java
 @@ -75,6 +75,22 @@ import java.util.ArrayList;
@@ -555,5 +555,5 @@ index 6fbc3c66c1bc..748152aa7c97 100644
 +    }
  }
 -- 
-2.25.1
+2.34.1
 
