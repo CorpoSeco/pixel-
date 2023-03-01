@@ -1,6 +1,6 @@
 $(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 $(call inherit-product, vendor/aosp/config/BoardConfigSoong.mk)
-$(call inherit-product, device/aosp/sepolicy/common/sepolicy.mk)
+$(call inherit-product, device/lineage/sepolicy/common/sepolicy.mk)
 -include vendor/custom/build/core/config.mk
 
 TARGET_HAS_FUSEBLK_SEPOLICY_ON_VENDOR := true
